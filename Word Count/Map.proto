@@ -1,0 +1,15 @@
+syntax = "proto3";
+package rpc;
+
+message MapperRequest {
+    string key = 1;
+    repeated string values = 2;
+}
+
+message MapperResponse {
+    string status = 1;
+}
+
+service MapperService {
+    rpc MapperWork(MapperRequest) returns (MapperResponse) {};
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+package rpc;
+
+message ReducerRequest {
+    string key = 1;
+    repeated string values = 2;
+}
+
+message ReducerResponse {
+    string status = 1;
+}
+
+service ReducerService {
+    rpc ReducerWork(ReducerRequest) returns (ReducerResponse) {};
+}
