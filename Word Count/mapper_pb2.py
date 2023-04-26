@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cmapper.proto\x12\x03rpc\"4\n\rMapperRequest\x12\x10\n\x08reducers\x18\x01 \x01(\x05\x12\x11\n\tfilenames\x18\x02 \x03(\t\" \n\x0eMapperResponse\x12\x0e\n\x06status\x18\x01 \x01(\t2:\n\x06Mapper\x12\x30\n\x03map\x12\x12.rpc.MapperRequest\x1a\x13.rpc.MapperResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cmapper.proto\x12\x03rpc\"L\n\rMapperRequest\x12\x10\n\x08reducers\x18\x01 \x01(\x05\x12\x11\n\tfilenames\x18\x02 \x03(\t\x12\x16\n\x0eoutputLocation\x18\x03 \x01(\t\" \n\x0eMapperResponse\x12\x0e\n\x06status\x18\x01 \x01(\t2:\n\x06Mapper\x12\x30\n\x03map\x12\x12.rpc.MapperRequest\x1a\x13.rpc.MapperResponse\"\x00\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'mapper_pb2', globals())
@@ -21,9 +21,9 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _MAPPERREQUEST._serialized_start=21
-  _MAPPERREQUEST._serialized_end=73
-  _MAPPERRESPONSE._serialized_start=75
-  _MAPPERRESPONSE._serialized_end=107
-  _MAPPER._serialized_start=109
-  _MAPPER._serialized_end=167
+  _MAPPERREQUEST._serialized_end=97
+  _MAPPERRESPONSE._serialized_start=99
+  _MAPPERRESPONSE._serialized_end=131
+  _MAPPER._serialized_start=133
+  _MAPPER._serialized_end=191
 # @@protoc_insertion_point(module_scope)

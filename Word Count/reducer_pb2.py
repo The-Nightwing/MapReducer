@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rreducer.proto\x12\x03rpc\"\x10\n\x0eReducerRequest\"!\n\x0fReducerResponse\x12\x0e\n\x06status\x18\x01 \x01(\t2>\n\x07Reducer\x12\x33\n\x06reduce\x12\x13.rpc.ReducerRequest\x1a\x14.rpc.ReducerResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rreducer.proto\x12\x03rpc\"H\n\x0eReducerRequest\x12\x16\n\x0eoutputLocation\x18\x01 \x01(\t\x12\r\n\x05index\x18\x02 \x01(\x05\x12\x0f\n\x07\x63ount_M\x18\x03 \x01(\x05\"!\n\x0fReducerResponse\x12\x0e\n\x06status\x18\x01 \x01(\t2>\n\x07Reducer\x12\x33\n\x06reduce\x12\x13.rpc.ReducerRequest\x1a\x14.rpc.ReducerResponseb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'reducer_pb2', globals())
@@ -21,9 +21,9 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _REDUCERREQUEST._serialized_start=22
-  _REDUCERREQUEST._serialized_end=38
-  _REDUCERRESPONSE._serialized_start=40
-  _REDUCERRESPONSE._serialized_end=73
-  _REDUCER._serialized_start=75
-  _REDUCER._serialized_end=137
+  _REDUCERREQUEST._serialized_end=94
+  _REDUCERRESPONSE._serialized_start=96
+  _REDUCERRESPONSE._serialized_end=129
+  _REDUCER._serialized_start=131
+  _REDUCER._serialized_end=193
 # @@protoc_insertion_point(module_scope)

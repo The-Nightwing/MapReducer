@@ -8,7 +8,11 @@ message Request {
 message Response {
 }
 
+message ClientRequest {
+}
+
 service Master {
+    rpc worker(ClientRequest) returns (Response);
     rpc mapperFinished(Request) returns (Response);
     rpc reducerFinished(Request) returns (Response);
 }

@@ -14,6 +14,11 @@ class MasterStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.worker = channel.unary_unary(
+                '/rpc.Master/worker',
+                request_serializer=master__pb2.ClientRequest.SerializeToString,
+                response_deserializer=master__pb2.Response.FromString,
+                )
         self.mapperFinished = channel.unary_unary(
                 '/rpc.Master/mapperFinished',
                 request_serializer=master__pb2.Request.SerializeToString,
@@ -28,6 +33,12 @@ class MasterStub(object):
 
 class MasterServicer(object):
     """Missing associated documentation comment in .proto file."""
+
+    def worker(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def mapperFinished(self, request, context):
         """Missing associated documentation comment in .proto file."""
@@ -44,6 +55,11 @@ class MasterServicer(object):
 
 def add_MasterServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'worker': grpc.unary_unary_rpc_method_handler(
+                    servicer.worker,
+                    request_deserializer=master__pb2.ClientRequest.FromString,
+                    response_serializer=master__pb2.Response.SerializeToString,
+            ),
             'mapperFinished': grpc.unary_unary_rpc_method_handler(
                     servicer.mapperFinished,
                     request_deserializer=master__pb2.Request.FromString,
@@ -63,6 +79,23 @@ def add_MasterServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class Master(object):
     """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def worker(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/rpc.Master/worker',
+            master__pb2.ClientRequest.SerializeToString,
+            master__pb2.Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def mapperFinished(request,

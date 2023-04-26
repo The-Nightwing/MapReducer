@@ -6,12 +6,14 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Optional as _Op
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class MapperRequest(_message.Message):
-    __slots__ = ["filenames", "reducers"]
+    __slots__ = ["filenames", "outputLocation", "reducers"]
     FILENAMES_FIELD_NUMBER: _ClassVar[int]
+    OUTPUTLOCATION_FIELD_NUMBER: _ClassVar[int]
     REDUCERS_FIELD_NUMBER: _ClassVar[int]
     filenames: _containers.RepeatedScalarFieldContainer[str]
+    outputLocation: str
     reducers: int
-    def __init__(self, reducers: _Optional[int] = ..., filenames: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, reducers: _Optional[int] = ..., filenames: _Optional[_Iterable[str]] = ..., outputLocation: _Optional[str] = ...) -> None: ...
 
 class MapperResponse(_message.Message):
     __slots__ = ["status"]

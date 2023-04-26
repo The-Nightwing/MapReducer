@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cmaster.proto\x12\x03rpc\"\x19\n\x07Request\x12\x0e\n\x06status\x18\x01 \x01(\t\"\n\n\x08Response2g\n\x06Master\x12-\n\x0emapperFinished\x12\x0c.rpc.Request\x1a\r.rpc.Response\x12.\n\x0freducerFinished\x12\x0c.rpc.Request\x1a\r.rpc.Responseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cmaster.proto\x12\x03rpc\"\x19\n\x07Request\x12\x0e\n\x06status\x18\x01 \x01(\t\"\n\n\x08Response\"\x0f\n\rClientRequest2\x94\x01\n\x06Master\x12+\n\x06worker\x12\x12.rpc.ClientRequest\x1a\r.rpc.Response\x12-\n\x0emapperFinished\x12\x0c.rpc.Request\x1a\r.rpc.Response\x12.\n\x0freducerFinished\x12\x0c.rpc.Request\x1a\r.rpc.Responseb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'master_pb2', globals())
@@ -24,6 +24,8 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _REQUEST._serialized_end=46
   _RESPONSE._serialized_start=48
   _RESPONSE._serialized_end=58
-  _MASTER._serialized_start=60
-  _MASTER._serialized_end=163
+  _CLIENTREQUEST._serialized_start=60
+  _CLIENTREQUEST._serialized_end=75
+  _MASTER._serialized_start=78
+  _MASTER._serialized_end=226
 # @@protoc_insertion_point(module_scope)

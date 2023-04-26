@@ -4,6 +4,10 @@ from typing import ClassVar as _ClassVar, Optional as _Optional
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
+class ClientRequest(_message.Message):
+    __slots__ = []
+    def __init__(self) -> None: ...
+
 class Request(_message.Message):
     __slots__ = ["status"]
     STATUS_FIELD_NUMBER: _ClassVar[int]

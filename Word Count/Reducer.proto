@@ -2,6 +2,9 @@ syntax = "proto3";
 package rpc;
 
 message ReducerRequest {
+    string outputLocation = 1;
+    int32 index = 2;
+    int32 count_M = 3; 
 }
 
 message ReducerResponse {
