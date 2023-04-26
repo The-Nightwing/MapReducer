@@ -23,6 +23,8 @@ class Master(master_pb2_grpc.MasterServicer):
         # start M processes and open mapper.py
         # start R processes and open reducer.py
         self.spawnMappers()
+        # self.spawnReducers()
+
 
     def mapFilesToMappers(self):
         files = os.listdir(self.inputLocation)
@@ -42,9 +44,10 @@ class Master(master_pb2_grpc.MasterServicer):
 
     def startReduce(self):
         for i in range(self.R):
-            print(str(6000+self.M+i), "START REDUCE")
-            with grpc.insecure_channel('localhost:'+str(6000+self.M+i)) as channel:
+            print(str(4000+i), "START REDUCE")
+            with grpc.insecure_channel('localhost:'+str(4000+i)) as channel:
                 stub = reducer_pb2_grpc.ReducerStub(channel)
+                print(stub)
                 response = stub.reduce(reducer_pb2.ReducerRequest(outputLocation=self.outputLocation, index = i, count_M = self.M))
         
     def startMapping(self, index):
@@ -58,7 +61,7 @@ class Master(master_pb2_grpc.MasterServicer):
         print("spawned Reducers")
         for i in range(self.R):
             name = i+1
-            port = 6000+self.M+i
+            port = 4000+i
             print(name, port, "reducer")
             process = multiprocessing.Process(
                 target=os.system, args=(f'python reducer.py {name} {port}',))
@@ -80,7 +83,6 @@ class Master(master_pb2_grpc.MasterServicer):
         self.mapperFinishCounter+=1
         if self.mapperFinishCounter == self.M:
             print("STARTING REDUCERS")
-            self.spawnReducers()
             self.startReduce()
 
 import sys

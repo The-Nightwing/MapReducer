@@ -10,10 +10,11 @@ class Reducer(reducer_pb2_grpc.ReducerServicer):
         self.name = name
 
     def reduce(self, request, context):
-        # get the name.txt file, and add up all the values of same keys and write to output_name.txt
         self.outputLocation = request.outputLocation
         self.count_M = request.count_M
         index = request.index
+        f = open('ouuuu.txt', 'w')
+        f.write('hehe')
         for j in range(self.count_M):
             with open(self.outputLocation + 'M' + str(j) + +'_P'+index+'.txt', 'r') as f:
                 lines = f.readlines()
@@ -33,9 +34,11 @@ class Reducer(reducer_pb2_grpc.ReducerServicer):
 if __name__ == "__main__":
     name = sys.argv[1]
     port = sys.argv[2]
+    print(name, port)
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     reducer_pb2_grpc.add_ReducerServicer_to_server(Reducer(name), server)
     server.add_insecure_port('[::]:' + port)
     server.start()
+    server.wait_for_termination()
 
 # python -m grpc_tools.protoc -I./  --python_out=ProtoFiles/ ./Master.proto --pyi_out=ProtoFiles/ --grpc_python_out=ProtoFiles/
