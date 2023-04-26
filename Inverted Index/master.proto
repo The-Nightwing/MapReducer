@@ -1,0 +1,18 @@
+syntax = "proto3";
+package rpc;
+
+message Request {
+    string status = 1;
+}
+
+message Response {
+}
+
+message ClientRequest {
+}
+
+service Master {
+    rpc worker(ClientRequest) returns (Response);
+    rpc mapperFinished(Request) returns (Response);
+    rpc reducerFinished(Request) returns (Response);
+}
