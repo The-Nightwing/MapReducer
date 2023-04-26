@@ -16,6 +16,7 @@ class Master(master_pb2_grpc.MasterServicer):
         self.outputLocation = outputLocation
         self.M = M
         self.R = R
+        self.mapperFinishCounter = 0
 
         # start M processes and open mapper.py
         # start R processes and open reducer.py
@@ -33,9 +34,10 @@ class Master(master_pb2_grpc.MasterServicer):
         threads = []
 
         for i in range(self.M):
-            thread = threading.Thread(target=self.startMapping(i))
-            thread.start()
-            threads.append(thread)
+            self.startMapping(i)
+            # thread = threading.Thread(target=self.startMapping(i))
+            # thread.start()
+            # threads.append(thread)
 
     def startReduce(self):
         for i in range(self.R):
@@ -89,7 +91,7 @@ def start(inputLocation, outputLocation, M, R):
 
 
 if __name__ == "__main__":
-    configFile = "D:\DSCD PROJECT\MapReducer\Word Count\config.txt"
+    configFile = "config.txt"
     # configFile = sys.argv[1]
     with open(configFile, 'r') as config:
         lines = config.readlines()

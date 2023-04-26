@@ -37,16 +37,14 @@ class Mapper(mapper_pb2_grpc.MapperServicer):
             print('Mapper Done')
 
     def partitionStrategy(self, keyVPairs):
-        try:
-            for tuple in keyVPairs:
-                hash_ = int(hash(tuple[0]))
-                reducer = hash_ % self.reducers
+        for tuple in keyVPairs:
+            hash_ = int(hash(tuple[0]))
+            reducer = hash_ % self.reducers
                 # print(tuple)
-                with open(self.outputLocation +'M'+str(self.name) +'_P'+str(reducer)+'.txt', 'w') as f:
+            with open(self.outputLocation +'M'+str(self.name) +'_P'+str(reducer)+'.txt', 'w') as f:
                     # print(tuple)
-                    f.write(str(tuple[0]) + ' ' + str(tuple[1]) + '\n')
-        except Exception as e:
-            print(e)
+                f.write(str(tuple[0]) + ' ' + str(tuple[1]) + '\n')
+        
 
 def main(mame, port):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
