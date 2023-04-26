@@ -2,8 +2,6 @@ syntax = "proto3";
 package rpc;
 
 message ReducerRequest {
-    string key = 1;
-    repeated string values = 2;
 }
 
 message ReducerResponse {
@@ -11,5 +9,5 @@ message ReducerResponse {
 }
 
 service ReducerService {
-    rpc ReducerWork(ReducerRequest) returns (ReducerResponse) {};
+    rpc reduce (ReducerRequest) returns (ReducerResponse);
 }

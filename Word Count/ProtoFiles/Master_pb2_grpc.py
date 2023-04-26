@@ -2,10 +2,10 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import Master_pb2 as Master__pb2
+import master_pb2 as master__pb2
 
 
-class MasterServiceStub(object):
+class MasterStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -14,58 +14,58 @@ class MasterServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.MasterMap = channel.unary_unary(
-                '/rpc.MasterService/MasterMap',
-                request_serializer=Master__pb2.Request.SerializeToString,
-                response_deserializer=Master__pb2.Response.FromString,
+        self.mapperFinished = channel.unary_unary(
+                '/rpc.Master/mapperFinished',
+                request_serializer=master__pb2.Request.SerializeToString,
+                response_deserializer=master__pb2.Response.FromString,
                 )
-        self.MasterReducer = channel.unary_unary(
-                '/rpc.MasterService/MasterReducer',
-                request_serializer=Master__pb2.Request.SerializeToString,
-                response_deserializer=Master__pb2.Response.FromString,
+        self.reducerFinished = channel.unary_unary(
+                '/rpc.Master/reducerFinished',
+                request_serializer=master__pb2.Request.SerializeToString,
+                response_deserializer=master__pb2.Response.FromString,
                 )
 
 
-class MasterServiceServicer(object):
+class MasterServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def MasterMap(self, request, context):
+    def mapperFinished(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def MasterReducer(self, request, context):
+    def reducerFinished(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_MasterServiceServicer_to_server(servicer, server):
+def add_MasterServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'MasterMap': grpc.unary_unary_rpc_method_handler(
-                    servicer.MasterMap,
-                    request_deserializer=Master__pb2.Request.FromString,
-                    response_serializer=Master__pb2.Response.SerializeToString,
+            'mapperFinished': grpc.unary_unary_rpc_method_handler(
+                    servicer.mapperFinished,
+                    request_deserializer=master__pb2.Request.FromString,
+                    response_serializer=master__pb2.Response.SerializeToString,
             ),
-            'MasterReducer': grpc.unary_unary_rpc_method_handler(
-                    servicer.MasterReducer,
-                    request_deserializer=Master__pb2.Request.FromString,
-                    response_serializer=Master__pb2.Response.SerializeToString,
+            'reducerFinished': grpc.unary_unary_rpc_method_handler(
+                    servicer.reducerFinished,
+                    request_deserializer=master__pb2.Request.FromString,
+                    response_serializer=master__pb2.Response.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'rpc.MasterService', rpc_method_handlers)
+            'rpc.Master', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class MasterService(object):
+class Master(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def MasterMap(request,
+    def mapperFinished(request,
             target,
             options=(),
             channel_credentials=None,
@@ -75,14 +75,14 @@ class MasterService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/rpc.MasterService/MasterMap',
-            Master__pb2.Request.SerializeToString,
-            Master__pb2.Response.FromString,
+        return grpc.experimental.unary_unary(request, target, '/rpc.Master/mapperFinished',
+            master__pb2.Request.SerializeToString,
+            master__pb2.Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def MasterReducer(request,
+    def reducerFinished(request,
             target,
             options=(),
             channel_credentials=None,
@@ -92,8 +92,8 @@ class MasterService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/rpc.MasterService/MasterReducer',
-            Master__pb2.Request.SerializeToString,
-            Master__pb2.Response.FromString,
+        return grpc.experimental.unary_unary(request, target, '/rpc.Master/reducerFinished',
+            master__pb2.Request.SerializeToString,
+            master__pb2.Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

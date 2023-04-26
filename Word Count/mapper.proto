@@ -2,8 +2,8 @@ syntax = "proto3";
 package rpc;
 
 message MapperRequest {
-    string key = 1;
-    repeated string values = 2;
+    int32 reducers = 1;
+    repeated string filenames = 2;
 }
 
 message MapperResponse {
@@ -11,5 +11,5 @@ message MapperResponse {
 }
 
 service MapperService {
-    rpc MapperWork(MapperRequest) returns (MapperResponse) {};
+    rpc map(MapperRequest) returns (MapperResponse) {};
 }

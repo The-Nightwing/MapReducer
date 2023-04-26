@@ -2,14 +2,13 @@ syntax = "proto3";
 package rpc;
 
 message Request {
-    string index = 1;
+    string status = 1;
 }
 
 message Response {
-    
 }
 
-service MasterService {
-    rpc MasterMap(Request) returns (Response) {};
-    rpc MasterReducer(Request) returns (Response) {};
+service Master {
+    rpc mapperFinished(Request) returns (Response);
+    rpc reducerFinished(Request) returns (Response);
 }

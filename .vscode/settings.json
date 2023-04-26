@@ -1,0 +1,10 @@
+{
+    "editor.quickSuggestions": {
+        "other": "on",
+        "comments": true,
+        "strings": "off"
+    },
+    "python.analysis.extraPaths": [
+        "./Word Count/ProtoFiles"
+    ]
+}
