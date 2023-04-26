@@ -41,7 +41,7 @@ class Mapper(mapper_pb2_grpc.MapperServicer):
             hash_ = int(hash(tuple[0]))
             reducer = hash_ % self.reducers
                 # print(tuple)
-            with open(self.outputLocation +'M'+str(self.name) +'_P'+str(reducer)+'.txt', 'w') as f:
+            with open(self.outputLocation +'M'+str(self.name) +'_P'+str(reducer)+'.txt', 'a') as f:
                     # print(tuple)
                 f.write(str(tuple[0]) + ' ' + str(tuple[1]) + '\n')
         
