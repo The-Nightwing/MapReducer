@@ -12,7 +12,6 @@ class Mapper(mapper_pb2_grpc.MapperServicer):
         super().__init__()
         self.name = name
         self.port = port
-        
 
     def map(self, request, context):
         self.reducers = request.reducers
@@ -25,26 +24,31 @@ class Mapper(mapper_pb2_grpc.MapperServicer):
                 lines = f.readlines()
                 for line in lines:
                     for word in line.split():
-                        keyVPairs.append((word, 1))
+                        keyVPairs.append((word.lower(), 1))
 
         self.partitionStrategy(keyVPairs)
         self.notifyMaster()
+        return mapper_pb2.MapperResponse(status='Mapper Done')
     
     def notifyMaster(self):
         with grpc.insecure_channel('localhost:8888') as channel:
             stub = master_pb2_grpc.MasterStub(channel)
             response = stub.mapperFinished(master_pb2.Request(status='Mapper Done'))
-            print('Mapper Done')
-
+            # print('Mapper Done')
+    def HashFunction(self, string, reducers):
+        sumD =0
+        for i in range(len(string)):
+             sumD += ord(string[i])
+        return sumD%reducers
+    
     def partitionStrategy(self, keyVPairs):
-        for tuple in keyVPairs:
-            hash_ = int(hash(tuple[0]))
-            reducer = hash_ % self.reducers
-                # print(tuple)
-            with open(self.outputLocation +'M'+str(self.name) +'_P'+str(reducer)+'.txt', 'a') as f:
-                    # print(tuple)
-                f.write(str(tuple[0]) + ' ' + str(tuple[1]) + '\n')
         
+            for tuple in keyVPairs:
+                #Hash function
+                hash_ = self.HashFunction(tuple[0], self.reducers)
+                reducer = hash_
+                with open(self.outputLocation +'M'+str(self.name) +'_P'+str(reducer)+'.txt', 'a') as f:
+                    f.write(str(tuple[0]) + ' ' + str(tuple[1]) + '\n')
 
 def main(mame, port):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
@@ -55,9 +59,8 @@ def main(mame, port):
     print("Server started, listening on " + port)
     server.wait_for_termination()
 
-
 if __name__ == "__main__":
     name = sys.argv[1]
     port = sys.argv[2]
-    print(name, port)
+    # print(name, port)
     main(name, port)

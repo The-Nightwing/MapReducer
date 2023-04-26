@@ -23,7 +23,7 @@ class Master(master_pb2_grpc.MasterServicer):
         # start M processes and open mapper.py
         # start R processes and open reducer.py
         self.spawnMappers()
-        # self.spawnReducers()
+        self.spawnReducers()
 
 
     def mapFilesToMappers(self):
@@ -41,14 +41,17 @@ class Master(master_pb2_grpc.MasterServicer):
             thread = threading.Thread(target=self.startMapping(i))
             thread.start()
             threads.append(thread)
+            # thread.join()
+        return master_pb2.Response()
 
     def startReduce(self):
         for i in range(self.R):
-            print(str(4000+i), "START REDUCE")
-            with grpc.insecure_channel('localhost:'+str(4000+i)) as channel:
+            # print(str(6000+i), "START REDUCE")
+            with grpc.insecure_channel('localhost:'+str(6000+i)) as channel:
                 stub = reducer_pb2_grpc.ReducerStub(channel)
-                print(stub)
+                # print(stub)
                 response = stub.reduce(reducer_pb2.ReducerRequest(outputLocation=self.outputLocation, index = i, count_M = self.M))
+                print(response.status)
         
     def startMapping(self, index):
         with grpc.insecure_channel('localhost:'+str(5000+index)) as channel:
@@ -61,7 +64,7 @@ class Master(master_pb2_grpc.MasterServicer):
         print("spawned Reducers")
         for i in range(self.R):
             name = i+1
-            port = 4000+i
+            port = 6000+i
             print(name, port, "reducer")
             process = multiprocessing.Process(
                 target=os.system, args=(f'python reducer.py {name} {port}',))
@@ -82,8 +85,9 @@ class Master(master_pb2_grpc.MasterServicer):
     def mapperFinished(self, request, context):
         self.mapperFinishCounter+=1
         if self.mapperFinishCounter == self.M:
-            print("STARTING REDUCERS")
+            # print("STARTING REDUCERS")
             self.startReduce()
+        return master_pb2.Response()
 
 import sys
 
@@ -98,8 +102,8 @@ def start(inputLocation, outputLocation, M, R):
 
 
 if __name__ == "__main__":
-    configFile = "config.txt"
-    # configFile = sys.argv[1]
+    # configFile = "config.txt"
+    configFile = sys.argv[1]
     with open(configFile, 'r') as config:
         lines = config.readlines()
         inputLocation = lines[0].strip()

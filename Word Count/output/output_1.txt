@@ -1,0 +1,12 @@
+apple 4
+are 2
+faith 8
+greatness 6
+have 2
+is 12
+some 4
+them 2
+this 2
+thrust 2
+upon 2
+worship 4
