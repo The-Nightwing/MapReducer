@@ -1,7 +1,7 @@
 from concurrent import futures
 import grpc
 import ProtoFiles.master_pb2 as Master_pb2
-import ProtoFiles.master_pb2_grpc as Master_pb2_grpc
+import ProtoFiles.master_pb2_grpc as master_pb2_grpc
 import ProtoFiles.mapper_pb2 as mapper_pb2
 import ProtoFiles.mapper_pb2_grpc as mapper_pb2_grpc
 import multiprocessing
@@ -9,7 +9,7 @@ import threading
 import os
 
 
-class Master(Master_pb2_grpc.MasterServicer):
+class Master(master_pb2_grpc.MasterServicer):
     def __init__(self, inputLocation, outputLocation, M, R):
         super().__init__()
         self.inputLocation = inputLocation
@@ -80,7 +80,7 @@ import sys
 def start(inputLocation, outputLocation, M, R):
     port = '8888'
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    Master_pb2_grpc.add_MasterServiceServicer_to_server(
+    master_pb2_grpc.add_MasterServiceServicer_to_server(
         Master(inputLocation, outputLocation, M, R), server)
     server.add_insecure_port('[::]:' + port)
     server.start()

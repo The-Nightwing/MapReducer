@@ -8,6 +8,6 @@ message ReducerResponse {
     string status = 1;
 }
 
-service ReducerService {
+service Reducer {
     rpc reduce (ReducerRequest) returns (ReducerResponse);
 }

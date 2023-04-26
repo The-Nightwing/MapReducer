@@ -1,10 +1,10 @@
 from concurrent import futures
 import grpc
-import ProtoFiles.master_pb2 as master_pb2
-import ProtoFiles.master_pb2_grpc as master_pb2_grpc
+import ProtoFiles.reducer_pb2 as reducer_pb2
+import ProtoFiles.reducer_pb2_grpc as reducer_pb2_grpc
 import sys
 
-class Reducer(master_pb2_grpc.MasterServiceServicer):
+class Reducer(reducer_pb2_grpc.ReducerServicer):
     def __init__(self, name):
         super().__init__()
         self.name = name
@@ -25,14 +25,13 @@ class Reducer(master_pb2_grpc.MasterServiceServicer):
                 for key, value in keyValues.items():
                     f.write(key + ' ' + value + '\n')
 
-        return master_pb2.ReducerResponse(status='Reducer Finished')
 
 
 if __name__ == "__main__":
     name = sys.argv[1]
     port = sys.argv[2]
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    master_pb2_grpc.add_MasterServiceServicer_to_server(Reducer(name), server)
+    reducer_pb2_grpc.add_MasterServiceServicer_to_server(Reducer(name), server)
     server.add_insecure_port('[::]:' + port)
     server.start()
 

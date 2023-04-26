@@ -10,6 +10,6 @@ message MapperResponse {
     string status = 1;
 }
 
-service MapperService {
+service Mapper {
     rpc map(MapperRequest) returns (MapperResponse) {};
 }

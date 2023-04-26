@@ -5,7 +5,7 @@ import grpc
 import mapper_pb2 as mapper__pb2
 
 
-class MapperServiceStub(object):
+class MapperStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -15,13 +15,13 @@ class MapperServiceStub(object):
             channel: A grpc.Channel.
         """
         self.map = channel.unary_unary(
-                '/rpc.MapperService/map',
+                '/rpc.Mapper/map',
                 request_serializer=mapper__pb2.MapperRequest.SerializeToString,
                 response_deserializer=mapper__pb2.MapperResponse.FromString,
                 )
 
 
-class MapperServiceServicer(object):
+class MapperServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def map(self, request, context):
@@ -31,7 +31,7 @@ class MapperServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_MapperServiceServicer_to_server(servicer, server):
+def add_MapperServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'map': grpc.unary_unary_rpc_method_handler(
                     servicer.map,
@@ -40,12 +40,12 @@ def add_MapperServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'rpc.MapperService', rpc_method_handlers)
+            'rpc.Mapper', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class MapperService(object):
+class Mapper(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
@@ -59,7 +59,7 @@ class MapperService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/rpc.MapperService/map',
+        return grpc.experimental.unary_unary(request, target, '/rpc.Mapper/map',
             mapper__pb2.MapperRequest.SerializeToString,
             mapper__pb2.MapperResponse.FromString,
             options, channel_credentials,

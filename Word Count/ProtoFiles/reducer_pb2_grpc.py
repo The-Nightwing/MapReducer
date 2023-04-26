@@ -5,7 +5,7 @@ import grpc
 import reducer_pb2 as reducer__pb2
 
 
-class ReducerServiceStub(object):
+class ReducerStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -15,13 +15,13 @@ class ReducerServiceStub(object):
             channel: A grpc.Channel.
         """
         self.reduce = channel.unary_unary(
-                '/rpc.ReducerService/reduce',
+                '/rpc.Reducer/reduce',
                 request_serializer=reducer__pb2.ReducerRequest.SerializeToString,
                 response_deserializer=reducer__pb2.ReducerResponse.FromString,
                 )
 
 
-class ReducerServiceServicer(object):
+class ReducerServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def reduce(self, request, context):
@@ -31,7 +31,7 @@ class ReducerServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_ReducerServiceServicer_to_server(servicer, server):
+def add_ReducerServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'reduce': grpc.unary_unary_rpc_method_handler(
                     servicer.reduce,
@@ -40,12 +40,12 @@ def add_ReducerServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'rpc.ReducerService', rpc_method_handlers)
+            'rpc.Reducer', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class ReducerService(object):
+class Reducer(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
@@ -59,7 +59,7 @@ class ReducerService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/rpc.ReducerService/reduce',
+        return grpc.experimental.unary_unary(request, target, '/rpc.Reducer/reduce',
             reducer__pb2.ReducerRequest.SerializeToString,
             reducer__pb2.ReducerResponse.FromString,
             options, channel_credentials,

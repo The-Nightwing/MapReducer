@@ -7,7 +7,7 @@ import ProtoFiles.master_pb2 as master_pb2
 import ProtoFiles.master_pb2_grpc as master_pb2_grpc
 
 
-class Mapper(mapper_pb2_grpc.ServerServicer):
+class Mapper(mapper_pb2_grpc.MapperServicer):
     def __init__(self, name, port):
         super().__init__()
         self.name = name
@@ -33,7 +33,7 @@ class Mapper(mapper_pb2_grpc.ServerServicer):
             stub = master_pb2_grpc.MasterServiceStub(channel)
             response = stub.mapperFinished(master_pb2.MapperFinishedRequest())
             print('Mapper Done')
-            
+
     def partitionStrategy(self, keyVPairs):
         for tuple in keyVPairs:
             hash = int(hash(tuple[0]))
