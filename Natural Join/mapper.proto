@@ -1,0 +1,16 @@
+syntax = "proto3";
+package rpc;
+
+message MapperRequest {
+    int32 reducers = 1;
+    repeated string filenames = 2;
+    string outputLocation = 3;
+}
+
+message MapperResponse {
+    string status = 1;
+}
+
+service Mapper {
+    rpc map(MapperRequest) returns (MapperResponse) {};
+}
