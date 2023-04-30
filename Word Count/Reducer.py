@@ -14,8 +14,7 @@ class Reducer(reducer_pb2_grpc.ReducerServicer):
         self.outputLocation = request.outputLocation
         self.count_M = request.count_M
         index = request.index
-        # f = open('ouuuu.txt', 'w')
-        # f.write('hehe')
+
         keyValues = {}
         for j in range(self.count_M):
             with open(self.outputLocation + 'M' + str(j+1) +'_P'+str(index)+'.txt', 'r') as f:
@@ -23,14 +22,16 @@ class Reducer(reducer_pb2_grpc.ReducerServicer):
                 for line in lines:
                     key, value = line.split()
                     if key in keyValues:
-                        keyValues[key] += int(value)
+                        keyValues[key].append(int(value))
                     else:
-                        keyValues[key] = int(value)
+                        keyValues[key] = [int(value)]
         # sort keyValues
         keyValues = dict(sorted(keyValues.items(), key=lambda item: item[0]))
         with open(self.outputLocation + 'output_'+ str(self.name)+'.txt', 'w') as f:
             for key, value in keyValues.items():
-                f.write(key + ' ' + str(value) + '\n')
+                values = keyValues[key]
+                sum_ = sum(values)
+                f.write(key + ' ' + str(sum_) + '\n')
 
         return reducer_pb2.ReducerResponse(status='Reducer Done')
 

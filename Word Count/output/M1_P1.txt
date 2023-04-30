@@ -2,13 +2,3 @@ an 1
 red 1
 in 1
 color 1
-work 1
-work 1
-not 1
-an 1
-red 1
-in 1
-color 1
-work 1
-work 1
-not 1

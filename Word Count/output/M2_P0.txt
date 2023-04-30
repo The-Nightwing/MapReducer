@@ -8,13 +8,3 @@ greatness 1
 thrust 1
 upon 1
 them 1
-greatness 1
-some 1
-are 1
-some 1
-greatness 1
-have 1
-greatness 1
-thrust 1
-upon 1
-them 1

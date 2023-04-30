@@ -22,7 +22,9 @@ class Mapper(mapper_pb2_grpc.MapperServicer):
         for filename in filenames:
             with open(filename, 'r') as f:
                 lines = f.readlines()
+                print(lines)
                 for line in lines:
+                    print(line.split())
                     for word in line.split():
                         keyVPairs.append((word.lower(), 1))
 
