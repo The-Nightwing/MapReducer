@@ -1,0 +1,10 @@
+greatness input/input2.txt
+some input/input2.txt
+are input/input2.txt
+some input/input2.txt
+greatness input/input2.txt
+have input/input2.txt
+greatness input/input2.txt
+thrust input/input2.txt
+upon input/input2.txt
+them input/input2.txt

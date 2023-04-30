@@ -1,0 +1,7 @@
+an input/input1.txt
+red input/input1.txt
+in input/input1.txt
+color input/input1.txt
+work input/input3.txt
+work input/input3.txt
+not input/input3.txt

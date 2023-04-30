@@ -1,0 +1,14 @@
+achieve {'input/input2.txt'}
+afraid {'input/input2.txt'}
+an {'input/input1.txt'}
+and {'input/input2.txt'}
+be {'input/input2.txt'}
+born {'input/input2.txt'}
+color {'input/input1.txt'}
+great {'input/input2.txt'}
+in {'input/input1.txt'}
+not {'input/input2.txt', 'input/input3.txt'}
+of {'input/input2.txt'}
+others {'input/input2.txt'}
+red {'input/input1.txt'}
+work {'input/input3.txt'}
