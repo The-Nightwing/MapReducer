@@ -17,6 +17,11 @@ class Mapper(mapper_pb2_grpc.MapperServicer):
         self.reducers = request.reducers
         filenames = request.filenames
         self.outputLocation = request.outputLocation
+
+        for i in range(self.reducers):
+            with open(self.outputLocation+'M'+str(self.name) +'_P'+str(i)+'.txt', 'w') as f:
+                f.close()
+
         keyVPairs = []
         for filename in filenames:
             with open(filename, 'r') as f:

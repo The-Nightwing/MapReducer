@@ -1,9 +1,0 @@
-be input/input2.txt
-not input/input2.txt
-afraid input/input2.txt
-of input/input2.txt
-born input/input2.txt
-great input/input2.txt
-achieve input/input2.txt
-and input/input2.txt
-others input/input2.txt
