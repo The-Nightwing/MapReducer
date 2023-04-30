@@ -32,6 +32,7 @@ class Master(master_pb2_grpc.MasterServicer):
         for i in range(len(files)//2):
             self.filesPerMapper[i % self.M].append(self.inputLocation + 'input' + str(i+1) + '_table1.txt')
             self.filesPerMapper[i % self.M].append(self.inputLocation + 'input' + str(i+1) + '_table2.txt')
+        self.spawnedMappersCount = (len(files)//2)%self.M
 
     def worker(self, request, context):
         self.mapFilesToMappers()
@@ -53,7 +54,7 @@ class Master(master_pb2_grpc.MasterServicer):
             with grpc.insecure_channel('localhost:'+str(6000+i)) as channel:
                 stub = reducer_pb2_grpc.ReducerStub(channel)
                 # print(stub)
-                response = stub.reduce(reducer_pb2.ReducerRequest(outputLocation=self.outputLocation, index = i, count_M = self.M))
+                response = stub.reduce(reducer_pb2.ReducerRequest(outputLocation=self.outputLocation, index = i, count_M = self.spawnedMappersCount))
                 print(response.status)
         
     def startMapping(self, index):
