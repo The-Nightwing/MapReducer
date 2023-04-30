@@ -16,6 +16,10 @@ class Mapper(mapper_pb2_grpc.MapperServicer):
     def map(self, request, context):
         self.reducers = request.reducers
         filenames = request.filenames
+        if len(filenames) == 0:
+            self.notifyMaster()
+            print(f'MAPPER is leaving name {self.name}')
+            return mapper_pb2.MapperResponse(status='Mapper Done')
         commonKey = self.findCommonKey(filenames)
         self.outputLocation = request.outputLocation
         print(f'MAPPER is here name {self.name}')
