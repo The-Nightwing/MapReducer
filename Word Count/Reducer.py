@@ -3,6 +3,7 @@ import grpc
 import reducer_pb2 as reducer_pb2
 import reducer_pb2_grpc as reducer_pb2_grpc
 import sys
+import os
 
 class Reducer(reducer_pb2_grpc.ReducerServicer):
     def __init__(self, name):

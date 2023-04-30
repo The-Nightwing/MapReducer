@@ -18,6 +18,10 @@ class Mapper(mapper_pb2_grpc.MapperServicer):
         filenames = request.filenames
         self.outputLocation = request.outputLocation
 
+        for i in range(self.reducers):
+            with open(self.outputLocation +'M'+str(self.name) +'_P'+str(i)+'.txt', 'w') as f:
+                f.close()
+                
         keyVPairs = []
         for filename in filenames:
             with open(filename, 'r') as f:
@@ -43,10 +47,8 @@ class Mapper(mapper_pb2_grpc.MapperServicer):
              sumD += ord(string[i])
         return sumD%reducers
     
-    def partitionStrategy(self, keyVPairs):
-        
+    def partitionStrategy(self, keyVPairs):   
             for tuple in keyVPairs:
-                #Hash function
                 hash_ = self.HashFunction(tuple[0], self.reducers)
                 reducer = hash_
                 with open(self.outputLocation +'M'+str(self.name) +'_P'+str(reducer)+'.txt', 'a') as f:
